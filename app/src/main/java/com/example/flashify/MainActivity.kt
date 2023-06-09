@@ -53,12 +53,12 @@ class MainActivity : AppCompatActivity() {
                 cameraManager.setTorchMode(camraId, true)
                 btnTorch.setImageResource(R.drawable.torch_on)
                 torchState = true
-                Toast.makeText(this, "I Love You Sona", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Flash On", Toast.LENGTH_SHORT).show()
             } else {
                 cameraManager.setTorchMode(camraId, false)
                 btnTorch.setImageResource(R.drawable.torch_off)
                 torchState = false
-                Toast.makeText(this, "I Love You Babu", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Flash Off", Toast.LENGTH_SHORT).show()
             }
 
         }
