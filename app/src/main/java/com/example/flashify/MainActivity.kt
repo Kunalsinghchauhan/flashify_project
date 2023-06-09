@@ -1,10 +1,14 @@
 package com.example.flashify
 
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.hardware.camera2.CameraManager
+import android.os.BatteryManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -45,6 +49,16 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }).check()
+        var tvbatteryStatus=findViewById<TextView>(R.id.tvbatterystatus)
+        val batteryStatus: Intent? = IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { ifilter -> applicationContext.registerReceiver(null,ifilter)
+        }
+        val batteryPct: Float? = batteryStatus?.let { intent ->
+            val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+            val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+            level * 100 / scale.toFloat()
+        }
+        tvbatteryStatus.text=batteryPct.toString()
+
     }
 
     private fun turnOnTorch() {
